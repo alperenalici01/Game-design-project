@@ -3042,14 +3042,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 686295604}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -40.96, y: 3.21, z: -15.02}
-  m_LocalScale: {x: 1, y: 4, z: 1}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0.040000916, y: 0.542, z: -0.020000458}
+  m_LocalScale: {x: 1, y: 4, z: 0.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 751898135}
   - {fileID: 2003137522}
-  m_Father: {fileID: 873057165}
+  m_Father: {fileID: 1756354452}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!136 &686295606
 CapsuleCollider:
@@ -6231,7 +6231,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1756354452}
-  - {fileID: 686295605}
   m_Father: {fileID: 141945458}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &904203619
@@ -9431,6 +9430,7 @@ GameObject:
   - component: {fileID: 1756354455}
   - component: {fileID: 1756354454}
   - component: {fileID: 1756354453}
+  - component: {fileID: 1756354456}
   m_Layer: 0
   m_Name: Rotating_Platform_Pole
   m_TagString: Untagged
@@ -9450,7 +9450,8 @@ Transform:
   m_LocalPosition: {x: -41, y: 0.5, z: -15}
   m_LocalScale: {x: 1, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 686295605}
   m_Father: {fileID: 873057165}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &1756354453
@@ -9533,6 +9534,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1756354451}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1756354456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1756354451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33a67ca8d836c36448f60be648b269b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlatformTurn
+  rotationSpeed: 1
 --- !u!1 &1787180339
 GameObject:
   m_ObjectHideFlags: 0
@@ -11749,13 +11763,18 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1815003636}
   serializedVersion: 2
+<<<<<<< Updated upstream
   m_LocalRotation: {x: -0.08218558, y: 0.82802665, z: -0.1259911, w: -0.540133}
   m_LocalPosition: {x: 41.717552, y: 18.201946, z: 16.261086}
+=======
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0.351, y: 7.9, z: -10.529}
+>>>>>>> Stashed changes
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &1815003640
 MonoBehaviour:
   m_ObjectHideFlags: 0
