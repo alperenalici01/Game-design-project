@@ -6315,6 +6315,7 @@ GameObject:
   m_Component:
   - component: {fileID: 933268278}
   - component: {fileID: 933268282}
+  - component: {fileID: 933268283}
   - component: {fileID: 933268281}
   - component: {fileID: 933268280}
   - component: {fileID: 933268279}
@@ -6433,6 +6434,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 933268277}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &933268283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 933268277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ef8a501f8625104a9a28c3599137304, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bobber
+  bobHeight: 0.25
+  bobSpeed: 3
 --- !u!1 &944487615
 GameObject:
   m_ObjectHideFlags: 0
