@@ -575,7 +575,7 @@ GameObject:
   - component: {fileID: 260817851}
   - component: {fileID: 260817850}
   - component: {fileID: 260817849}
-  - component: {fileID: 260817848}
+  - component: {fileID: 260817852}
   m_Layer: 0
   m_Name: Capsule (1)
   m_TagString: Untagged
@@ -598,20 +598,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 344525489}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &260817848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 260817846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcb284adfd7b88e47b4af90d291c808e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Capsule_Movement
-  capsuleHeight: 0.25
-  capsuleSpeed: 2
 --- !u!136 &260817849
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -692,6 +678,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 260817846}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &260817852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 260817846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcb284adfd7b88e47b4af90d291c808e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Capsule_Movement
+  capsuleHeight: 1
+  capsuleSpeed: 1.5
 --- !u!1 &280095237
 GameObject:
   m_ObjectHideFlags: 0
@@ -6664,7 +6664,7 @@ GameObject:
   - component: {fileID: 939749660}
   - component: {fileID: 939749659}
   - component: {fileID: 939749658}
-  - component: {fileID: 939749657}
+  - component: {fileID: 939749661}
   m_Layer: 0
   m_Name: Capsule (2)
   m_TagString: Untagged
@@ -6687,20 +6687,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 344525489}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &939749657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 939749655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcb284adfd7b88e47b4af90d291c808e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Capsule_Movement
-  capsuleHeight: 0.25
-  capsuleSpeed: 2
 --- !u!136 &939749658
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6781,6 +6767,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 939749655}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &939749661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939749655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcb284adfd7b88e47b4af90d291c808e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Capsule_Movement
+  capsuleHeight: 1
+  capsuleSpeed: 1.5
 --- !u!1 &944487615
 GameObject:
   m_ObjectHideFlags: 0
@@ -8891,7 +8891,7 @@ GameObject:
   - component: {fileID: 1007650786}
   - component: {fileID: 1007650785}
   - component: {fileID: 1007650784}
-  - component: {fileID: 1007650783}
+  - component: {fileID: 1007650787}
   m_Layer: 0
   m_Name: Capsule (3)
   m_TagString: Untagged
@@ -8914,20 +8914,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 344525489}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1007650783
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1007650781}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcb284adfd7b88e47b4af90d291c808e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Capsule_Movement
-  capsuleHeight: 0.25
-  capsuleSpeed: 2
 --- !u!136 &1007650784
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -9008,6 +8994,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1007650781}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1007650787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007650781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcb284adfd7b88e47b4af90d291c808e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Capsule_Movement
+  capsuleHeight: 1
+  capsuleSpeed: 1.5
 --- !u!1 &1058599459
 GameObject:
   m_ObjectHideFlags: 0
@@ -9669,7 +9669,7 @@ GameObject:
   - component: {fileID: 1393263746}
   - component: {fileID: 1393263745}
   - component: {fileID: 1393263744}
-  - component: {fileID: 1393263743}
+  - component: {fileID: 1393263747}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -9692,20 +9692,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 344525489}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1393263743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1393263741}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcb284adfd7b88e47b4af90d291c808e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Capsule_Movement
-  capsuleHeight: 0.25
-  capsuleSpeed: 2
 --- !u!136 &1393263744
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -9786,6 +9772,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1393263741}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1393263747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393263741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcb284adfd7b88e47b4af90d291c808e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Capsule_Movement
+  capsuleHeight: 1
+  capsuleSpeed: 1.5
 --- !u!43 &1632186993
 Mesh:
   m_ObjectHideFlags: 0
