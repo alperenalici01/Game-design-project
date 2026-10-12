@@ -20913,7 +20913,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 84
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!136 &863804486
 CapsuleCollider:
@@ -37144,6 +37144,10 @@ PrefabInstance:
     - target: {fileID: 341837832593677624, guid: 590bcfc88a3974142a2a06d3189c5314, type: 3}
       propertyPath: m_Name
       value: coin
+      objectReference: {fileID: 0}
+    - target: {fileID: 3457707900054379968, guid: 590bcfc88a3974142a2a06d3189c5314, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8609530876241933620, guid: 590bcfc88a3974142a2a06d3189c5314, type: 3}
       propertyPath: m_LocalPosition.x
