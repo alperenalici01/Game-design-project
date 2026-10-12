@@ -1,10 +1,14 @@
 using UnityEngine;
-public class Spinner : MonoBehaviour
+// TEST TOOL: not part of the game
+public class FrameRateTest : MonoBehaviour
 {
-    // degrees per SECOND
-    [SerializeField] private float rotationSpeed = 90f;
+    [SerializeField] private int targetFps = 10;
     void Update()
     {
-        transform.Rotate(0f, rotationSpeed * Time.deltaTime, 0f);
+        Application.targetFrameRate = targetFps;
+    }
+    void OnDisable() // runs when we press Stop
+    {
+        Application.targetFrameRate = -1; // no limit
     }
 }
