@@ -1459,7 +1459,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 10
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!136 &1010862150
 CapsuleCollider:
@@ -2260,7 +2260,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5257231969642633419, guid: ce9b5c7694110a4498139014c65f2ebd, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5257231969642633419, guid: ce9b5c7694110a4498139014c65f2ebd, type: 3}
       propertyPath: m_LocalRotation.x
@@ -2268,7 +2268,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5257231969642633419, guid: ce9b5c7694110a4498139014c65f2ebd, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5257231969642633419, guid: ce9b5c7694110a4498139014c65f2ebd, type: 3}
       propertyPath: m_LocalRotation.z
@@ -2280,7 +2280,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5257231969642633419, guid: ce9b5c7694110a4498139014c65f2ebd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5257231969642633419, guid: ce9b5c7694110a4498139014c65f2ebd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -2350,23 +2350,6 @@ Transform:
   - {fileID: 1598568542}
   m_Father: {fileID: 85906958}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1692947845 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6253696466005485163, guid: ba0eabceca5ad9d4fa5aa21036bf3660, type: 3}
-  m_PrefabInstance: {fileID: 282585975151198665}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1692947846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1692947845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ca5c3d58e5b6a84b864cc02f1bf68a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::KillZone
 --- !u!1 &1777595215
 GameObject:
   m_ObjectHideFlags: 0
@@ -2649,6 +2632,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5abd7660a82e08c4b8bf769d0bdcdfbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoinPickup
+--- !u!1 &1907091916 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8119655899940559941, guid: ba0eabceca5ad9d4fa5aa21036bf3660, type: 3}
+  m_PrefabInstance: {fileID: 282585975151198665}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1907091921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1907091916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ca5c3d58e5b6a84b864cc02f1bf68a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KillZone
 --- !u!1001 &1939223436
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3222,9 +3222,9 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6253696466005485163, guid: ba0eabceca5ad9d4fa5aa21036bf3660, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 8119655899940559941, guid: ba0eabceca5ad9d4fa5aa21036bf3660, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1692947846}
+      addedObject: {fileID: 1907091921}
   m_SourcePrefab: {fileID: 100100000, guid: ba0eabceca5ad9d4fa5aa21036bf3660, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
