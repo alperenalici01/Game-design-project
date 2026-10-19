@@ -19311,7 +19311,7 @@ Transform:
   m_GameObject: {fileID: 778933117}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: 222.5, y: 13.6, z: -9.69}
+  m_LocalPosition: {x: 236.5, y: 13.6, z: -20.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20868,6 +20868,9 @@ GameObject:
   - component: {fileID: 863804486}
   - component: {fileID: 863804485}
   - component: {fileID: 863804484}
+  - component: {fileID: 863804492}
+  - component: {fileID: 863804491}
+  - component: {fileID: 863804490}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -20913,7 +20916,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!136 &863804486
 CapsuleCollider:
@@ -21011,6 +21014,49 @@ Transform:
   - {fileID: 1797882112}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 5}
+--- !u!114 &863804490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863804483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9522e75180a65e74f8a625e448dd5d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerDrop
+--- !u!114 &863804491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863804483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a145be3c69cf05248b5f1d7d4fba0a58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerJump
+  jumpForce: 4
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 8
+--- !u!114 &863804492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863804483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1902432e0695b754aa4dc36bd3df1191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMove
+  maxSpeed: 5
+  acceleration: 40
+  turnSpeed: 720
 --- !u!1 &880926284
 GameObject:
   m_ObjectHideFlags: 0
@@ -33011,7 +33057,7 @@ GameObject:
   - component: {fileID: 1218195770}
   - component: {fileID: 1218195769}
   - component: {fileID: 1218195768}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Plane (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
