@@ -128,7 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6503881}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Arena
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 26886835}
   - component: {fileID: 26886834}
   - component: {fileID: 26886833}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,7 +289,8 @@ GameObject:
   - component: {fileID: 222710968}
   - component: {fileID: 222710967}
   - component: {fileID: 222710966}
-  m_Layer: 0
+  - component: {fileID: 222710969}
+  m_Layer: 3
   m_Name: Platform (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,12 +329,12 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5000001
-  m_Height: 2
+  m_Height: 15.000007
   m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  m_Center: {x: 0.00000003973643, y: -0.0000005960471, z: -0.00000007947285}
 --- !u!23 &222710967
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -390,6 +391,28 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 222710964}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!64 &222710969
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 222710964}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &224187791
 GameObject:
@@ -527,7 +550,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 668750774}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Goals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -562,7 +585,7 @@ GameObject:
   - component: {fileID: 682972956}
   - component: {fileID: 682972955}
   - component: {fileID: 682972954}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -674,7 +697,7 @@ GameObject:
   - component: {fileID: 720136161}
   - component: {fileID: 720136160}
   - component: {fileID: 720136159}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FloatingPlatform (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -788,6 +811,9 @@ GameObject:
   - component: {fileID: 868738981}
   - component: {fileID: 868738985}
   - component: {fileID: 868738986}
+  - component: {fileID: 868738989}
+  - component: {fileID: 868738988}
+  - component: {fileID: 868738987}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -931,6 +957,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCarry
   carryPoint: {fileID: 2045572066}
+--- !u!114 &868738987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868738980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1902432e0695b754aa4dc36bd3df1191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMove
+  maxSpeed: 5
+  acceleration: 40
+  turnSpeed: 720
+--- !u!114 &868738988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868738980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a145be3c69cf05248b5f1d7d4fba0a58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerJump
+  jumpForce: 4
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 8
+--- !u!114 &868738989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868738980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9522e75180a65e74f8a625e448dd5d08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerDrop
 --- !u!1 &941727282 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5196470503965550856, guid: f8d2c5b1aa908d34f916e8f96f4cdccd, type: 3}
@@ -1034,7 +1103,7 @@ GameObject:
   - component: {fileID: 1016886698}
   - component: {fileID: 1016886697}
   - component: {fileID: 1016886696}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FloatingPlatform (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1147,7 +1216,7 @@ GameObject:
   - component: {fileID: 1121737130}
   - component: {fileID: 1121737129}
   - component: {fileID: 1121737132}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DeliveryZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1273,7 +1342,7 @@ GameObject:
   - component: {fileID: 1196893851}
   - component: {fileID: 1196893850}
   - component: {fileID: 1196893849}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: StartingPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1384,6 +1453,7 @@ GameObject:
   - component: {fileID: 1281121729}
   - component: {fileID: 1281121728}
   - component: {fileID: 1281121727}
+  - component: {fileID: 1281121730}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1458,13 +1528,57 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1281121726}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.022665642, y: 0.9763826, z: -0.17216258, w: 0.12854326}
+  m_LocalPosition: {x: -56.05, y: 12.75, z: 1.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 20, y: 165, z: 0}
+--- !u!114 &1281121730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281121726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!1 &1581501930
 GameObject:
   m_ObjectHideFlags: 0
@@ -1477,7 +1591,7 @@ GameObject:
   - component: {fileID: 1581501934}
   - component: {fileID: 1581501933}
   - component: {fileID: 1581501932}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FloatingPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1586,7 +1700,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1618672857}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: HazardousBallPointB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1620,7 +1734,7 @@ GameObject:
   - component: {fileID: 1648796707}
   - component: {fileID: 1648796706}
   - component: {fileID: 1648796705}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FloatingPlatform (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1729,7 +1843,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1740748251}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Hazards
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1768,7 +1882,7 @@ GameObject:
   - component: {fileID: 1743836167}
   - component: {fileID: 1743836168}
   - component: {fileID: 1743836169}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: HazardousBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1934,7 +2048,7 @@ GameObject:
   - component: {fileID: 1766441503}
   - component: {fileID: 1766441502}
   - component: {fileID: 1766441505}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RotatingPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2059,7 +2173,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1881983320}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Coins
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2094,7 +2208,8 @@ GameObject:
   - component: {fileID: 1986799795}
   - component: {fileID: 1986799794}
   - component: {fileID: 1986799793}
-  m_Layer: 0
+  - component: {fileID: 1986799796}
+  m_Layer: 3
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2133,7 +2248,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5000001
   m_Height: 2
@@ -2196,6 +2311,28 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1986799791}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!64 &1986799796
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986799791}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &2010813095
 GameObject:
   m_ObjectHideFlags: 0
@@ -2208,7 +2345,8 @@ GameObject:
   - component: {fileID: 2010813099}
   - component: {fileID: 2010813098}
   - component: {fileID: 2010813097}
-  m_Layer: 0
+  - component: {fileID: 2010813100}
+  m_Layer: 3
   m_Name: FloatingPlatform (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2276,7 +2414,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a29ac3f36165d634fb2d6f1cc92ad7d8, type: 2}
+  - {fileID: 2100000, guid: 6d57d7d17aa87944cb6ee33c4842b4b1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2308,6 +2446,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2010813095}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2010813100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010813095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc4ba34979e58404b838495f2a63aa83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Slippery
+  grip: 0.04
 --- !u!1 &2045572065
 GameObject:
   m_ObjectHideFlags: 0
@@ -2347,6 +2498,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1881983320}
     m_Modifications:
+    - target: {fileID: 1447968410294611258, guid: f8d2c5b1aa908d34f916e8f96f4cdccd, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3820120595076868757, guid: f8d2c5b1aa908d34f916e8f96f4cdccd, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -2354,6 +2509,10 @@ PrefabInstance:
     - target: {fileID: 5196470503965550856, guid: f8d2c5b1aa908d34f916e8f96f4cdccd, type: 3}
       propertyPath: m_Name
       value: Coin
+      objectReference: {fileID: 0}
+    - target: {fileID: 5196470503965550856, guid: f8d2c5b1aa908d34f916e8f96f4cdccd, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5249453647979486552, guid: f8d2c5b1aa908d34f916e8f96f4cdccd, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2416,7 +2575,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1281121729}
   - {fileID: 224187793}
   - {fileID: 6503881}
   - {fileID: 868738984}
+  - {fileID: 1281121729}
