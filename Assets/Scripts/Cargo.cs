@@ -6,13 +6,14 @@ public class Cargo : MonoBehaviour
     private Collider box; // solid body
     private Collider range; // pickup trigger
     private float canPickUpAt; // re-pickup time
-
+    //hello
     void Awake()
     {
     // find our own components once, keep them
         rb = GetComponent<Rigidbody>();
         box = GetComponent<BoxCollider>();
         range = GetComponent<SphereCollider>();
+    
     }
     // a question: "can I be picked up now?"
     public bool CanBePickedUp()
