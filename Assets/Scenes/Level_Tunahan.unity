@@ -1331,6 +1331,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: d0f5b46e8c000fa49b6b21e4220303a2, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c54c425f5fcaa6a4bae5c68d5a295301, type: 2}
     - target: {fileID: 919132149155446097, guid: d0f5b46e8c000fa49b6b21e4220303a2, type: 3}
       propertyPath: m_Name
       value: Wall_2M (2)
@@ -6097,7 +6101,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2762395934199798472, guid: abb892af7411c1e40aebaec309d6ced5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 77.71
+      value: 78.5
       objectReference: {fileID: 0}
     - target: {fileID: 2762395934199798472, guid: abb892af7411c1e40aebaec309d6ced5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6105,7 +6109,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2762395934199798472, guid: abb892af7411c1e40aebaec309d6ced5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.73
+      value: -6.92
       objectReference: {fileID: 0}
     - target: {fileID: 2762395934199798472, guid: abb892af7411c1e40aebaec309d6ced5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10578,6 +10582,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: d0f5b46e8c000fa49b6b21e4220303a2, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c54c425f5fcaa6a4bae5c68d5a295301, type: 2}
     - target: {fileID: 919132149155446097, guid: d0f5b46e8c000fa49b6b21e4220303a2, type: 3}
       propertyPath: m_Name
       value: Wall_2M (1)
@@ -11563,6 +11571,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: d0f5b46e8c000fa49b6b21e4220303a2, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: c54c425f5fcaa6a4bae5c68d5a295301, type: 2}
     - target: {fileID: 919132149155446097, guid: d0f5b46e8c000fa49b6b21e4220303a2, type: 3}
       propertyPath: m_Name
       value: Wall_2M (3)
