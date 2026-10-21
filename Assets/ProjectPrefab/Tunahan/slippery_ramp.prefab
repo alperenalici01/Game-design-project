@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 3734966621865669410}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.17364825, w: 0.9848078}
-  m_LocalPosition: {x: 2.33107, y: -0.96314, z: -3.5759125}
-  m_LocalScale: {x: 7.789304, y: 0.21556, z: 27.174139}
+  m_LocalPosition: {x: 2.33107, y: -0.96314, z: -6.72}
+  m_LocalScale: {x: 7.789304, y: 0.21556, z: 20.652346}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3007359502678569596}
@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 94803691ef3c1644cb634595542fa1c8, type: 2}
+  - {fileID: 2100000, guid: 25ef47c0cc761874fba960e5c0d1fcd8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -108,7 +108,7 @@ MonoBehaviour:
   staticFriction: 0
   bounciness: 0
   applySlideForce: 1
-  slideAcceleration: 12
+  slideAcceleration: 50
   minSlopeAngle: 5
 --- !u!65 &2937895784041086574
 BoxCollider:
@@ -155,11 +155,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6479543767426394483}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 161.3, y: 2.50314, z: 52.88}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 31.99, y: 2.07, z: -7.03}
+  m_LocalScale: {x: 0.84444, y: 0.84444, z: 0.23382542}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6018385406968975226}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
