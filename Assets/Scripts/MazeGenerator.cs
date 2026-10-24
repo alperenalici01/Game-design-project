@@ -8,15 +8,21 @@ public class ProceduralMazeGenerator : MonoBehaviour
     public float wallSize = 2f;
 
     [Tooltip("Genişlik ve Derinlik mutlaka TEK SAYI olmalıdır (Örn: 31, 51, 101)")]
-    public int width = 31;
+    public int width = 25;
     public int depth = 31;
 
+    [Header("Hazard (Tehlike) Ayarları")]
+    public GameObject hazardPrefab; // Top prefabını buraya sürükle
+    public int hazardCount = 5;     // Kaç top üretilecek?
+
     private int[,] mazeGrid;
+    private List<Vector3> emptyPaths = new List<Vector3>(); // Boş yolların listesi
 
     void Start()
     {
         GenerateMazeData();
         BuildMaze();
+        SpawnHazards(); // Labirent fiziksel olarak oluştuktan sonra topları yarat
     }
 
     void GenerateMazeData()
@@ -45,6 +51,7 @@ public class ProceduralMazeGenerator : MonoBehaviour
 
                 Vector2Int chosen = neighbors[Random.Range(0, neighbors.Count)];
 
+                // Matematiksel hata düzeltildi (chosen - current)
                 Vector2Int wall = current + (chosen - current) / 2;
                 mazeGrid[wall.y, wall.x] = 0;
                 mazeGrid[chosen.y, chosen.x] = 0;
@@ -54,8 +61,8 @@ public class ProceduralMazeGenerator : MonoBehaviour
         }
 
         // Giriş ve Çıkış Noktalarını Belirle
-        mazeGrid[0, 1] = 0;                           // Alt kenardan giriş
-        mazeGrid[depth - 1, width - 2] = 0;           // Üst kenardan çıkış
+        mazeGrid[0, 1] = 0;
+        mazeGrid[depth - 1, width - 2] = 0;
     }
 
     List<Vector2Int> GetUnvisitedNeighbors(Vector2Int cell)
@@ -81,13 +88,38 @@ public class ProceduralMazeGenerator : MonoBehaviour
         {
             for (int x = 0; x < width; x++)
             {
+                // Pozisyon hesaplama formülü düzeltildi (x * wallSize)
+                Vector3 position = new Vector3(x * wallSize, 0, z * wallSize);
+
                 if (mazeGrid[z, x] == 1)
                 {
-                    Vector3 position = new Vector3(x * wallSize, 0, z * wallSize);
+                    // Burası duvar, duvar yarat
                     GameObject newWall = Instantiate(wallPrefab, position, Quaternion.identity);
                     newWall.transform.parent = this.transform;
                 }
+                else if (mazeGrid[z, x] == 0)
+                {
+                    // YENİ: Burası boş yol, pozisyonunu listeye kaydet
+                    emptyPaths.Add(position);
+                }
             }
+        }
+    }
+
+    void SpawnHazards()
+    {
+        int spawnLimit = Mathf.Min(hazardCount, emptyPaths.Count);
+
+        for (int i = 0; i < spawnLimit; i++)
+        {
+            int randomIndex = Random.Range(0, emptyPaths.Count);
+            Vector3 spawnPos = emptyPaths[randomIndex];
+
+            spawnPos.y += 0.5f;
+
+            Instantiate(hazardPrefab, spawnPos, Quaternion.identity);
+
+            emptyPaths.RemoveAt(randomIndex);
         }
     }
 }
