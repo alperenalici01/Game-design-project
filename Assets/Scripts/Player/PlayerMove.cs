@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class PlayerMove : MonoBehaviour
 {
     [SerializeField] private float maxSpeed = 5f;
@@ -8,6 +9,8 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float acceleration = 40f;
 
     [SerializeField] private float turnSpeed = 720f;
+
+
 
     private Rigidbody rb;
 
@@ -31,12 +34,9 @@ public class PlayerMove : MonoBehaviour
 
     {
 
-    // every frame: read WASD, arrows or the left stick
-
         Vector2 input = moveAction.ReadValue<Vector2>();
 
         direction = new Vector3(input.x, 0f, input.y);
-
     }
 
     void FixedUpdate()
