@@ -8,11 +8,13 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] private Rigidbody player;       // drag the Player here
     [SerializeField] private Transform coinsParent;  // drag Level > Coins here
+    [SerializeField] private Transform enemiesParent; // drag Level > Enemies here
     [SerializeField] private int fontSize = 36;
 
     private Vector3 startPosition;
     private Quaternion startRotation;
     private CoinPickup[] allCoins;
+    private StompableEnemy[] allEnemies = new StompableEnemy[0];
     private int coins;
     private bool won;
 
@@ -28,6 +30,10 @@ public class LevelManager : MonoBehaviour
         startPosition = player.position;
         startRotation = player.rotation;
         allCoins = coinsParent.GetComponentsInChildren<CoinPickup>(true);
+        if (enemiesParent != null)
+        {
+            allEnemies = enemiesParent.GetComponentsInChildren<StompableEnemy>(true);
+        }
     }
 
     void Update()
@@ -76,6 +82,12 @@ public class LevelManager : MonoBehaviour
         foreach (CoinPickup coin in allCoins)
         {
             coin.gameObject.SetActive(true);
+        }
+
+        // stomped enemies come back too
+        foreach (StompableEnemy enemy in allEnemies)
+        {
+            enemy.gameObject.SetActive(true);
         }
     }
 
