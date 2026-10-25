@@ -8,9 +8,16 @@ public class DeliveryZone : MonoBehaviour
         PlayerCarry carry = other.GetComponent<PlayerCarry>();
         if (carry == null) return;
         if (!carry.IsCarrying()) return;
+        
         // Act: take the cargo and remove it
         Cargo cargo = carry.HandOver();
         Destroy(cargo.gameObject);
         Debug.Log("Delivered!");
+
+        // Trigger the LevelManager win state!
+        if (LevelManager_Zafer.Instance != null)
+        {
+            LevelManager_Zafer.Instance.Win();
+        }
     }
 }

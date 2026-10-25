@@ -40,37 +40,25 @@ public class PlayerMove : MonoBehaviour
     }
 
     void FixedUpdate()
-
     {
-
-        // speed we want, speed we have (not up/down)
-
         Vector3 wanted = direction * maxSpeed;
-
         Vector3 v = rb.linearVelocity;
-
         Vector3 flat = new Vector3(v.x, 0f, v.z);
 
-        // get a little closer to the wanted speed
-
-        float step = acceleration * grip * Time.fixedDeltaTime;
-
+        // If there is input, allow normal acceleration. If there is no input (sliding on ice), use the low grip!
+        float currentAcceleration = (direction.magnitude > 0.1f) ? acceleration : (acceleration * grip);
+        
+        float step = currentAcceleration * Time.fixedDeltaTime;
         flat = Vector3.MoveTowards(flat, wanted, step);
 
         rb.linearVelocity = new Vector3(flat.x, v.y, flat.z);
 
         // turn towards the way we are going
-
         if (direction == Vector3.zero) return;
-
         Quaternion look = Quaternion.LookRotation(direction);
-
         float turn = turnSpeed * Time.fixedDeltaTime;
-
         look = Quaternion.RotateTowards(rb.rotation, look, turn);
-
         rb.MoveRotation(look);
-
     }
 
     // the icy ramp calls this

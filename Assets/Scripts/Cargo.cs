@@ -26,6 +26,13 @@ public class Cargo : MonoBehaviour
         rb.isKinematic = true; // physics stops
         box.enabled = false; // no bumping
         range.enabled = false; // no re-pickup
+        
+        // Tell the LevelManager we collected a coin/cargo!
+        if (LevelManager_Zafer.Instance != null)
+        {
+            LevelManager_Zafer.Instance.AddCoin();
+        }
+
         // become a child of the carry point
         transform.SetParent(carryPoint);
         transform.localPosition = Vector3.zero;
