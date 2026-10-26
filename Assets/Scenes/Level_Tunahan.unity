@@ -7679,6 +7679,7 @@ GameObject:
   - component: {fileID: 1457944707}
   - component: {fileID: 1457944706}
   - component: {fileID: 1457944709}
+  - component: {fileID: 1457944710}
   m_Layer: 0
   m_Name: Exit
   m_TagString: Untagged
@@ -7786,11 +7787,25 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1457944704}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9395fad3548eab2448b4d56a9d675c62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelExit
+--- !u!114 &1457944710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1457944704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93e157eb17ea9c24b941f8d3a3895c8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Goal
+  playerTag: Player
+  loopToFirstScene: 0
 --- !u!1 &1460069791
 GameObject:
   m_ObjectHideFlags: 0
@@ -8706,6 +8721,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8567876285450831240, guid: a6ee53aeed7de2841a5c65bf14fe414c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1956246220}
+    - targetCorrespondingSourceObject: {fileID: 8567876285450831240, guid: a6ee53aeed7de2841a5c65bf14fe414c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1956246221}
   m_SourcePrefab: {fileID: 100100000, guid: a6ee53aeed7de2841a5c65bf14fe414c, type: 3}
 --- !u!4 &1603836941 stripped
 Transform:
@@ -11276,6 +11294,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.026604638, y: 0.026604632, z: 0.027393378}
   m_Center: {x: 0, y: 0, z: 0.0036966915}
+--- !u!114 &1956246221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1956246217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93e157eb17ea9c24b941f8d3a3895c8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Goal
+  playerTag: Player
+  loopToFirstScene: 0
 --- !u!1001 &1966606581
 PrefabInstance:
   m_ObjectHideFlags: 0
