@@ -26,8 +26,7 @@ public class Goal : MonoBehaviour
         if (other.CompareTag(playerTag)) return true;
         return other.GetComponentInParent<PlayerMove>() != null
             || other.GetComponentInParent<PlayerMove_Mertcan>() != null
-            || other.GetComponentInParent<PlayerCarry>() != null
-            || other.GetComponentInParent<SimpleCourierController>() != null;
+            || other.GetComponentInParent<PlayerCarry>() != null;
     }
 
     void LoadNextScene()

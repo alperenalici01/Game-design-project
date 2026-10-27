@@ -101,7 +101,7 @@ public class LevelManager : MonoBehaviour
         GUI.Label(new Rect(20, 20, 600, 80), "Coins: " + coins + " / " + allCoins.Length, style);
 
         if (!won) return;
-        style.fontSize = fontSize * 2;
+        style.fontSize = Mathf.Max(18, fontSize - 8);
         style.alignment = TextAnchor.MiddleCenter;
         style.normal.textColor = Color.green;
         GUI.Label(new Rect(0, 0, Screen.width, Screen.height),
