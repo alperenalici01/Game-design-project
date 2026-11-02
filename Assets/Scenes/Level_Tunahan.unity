@@ -6432,7 +6432,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5469939571528509822, guid: 3dcc29235683e8146ad479b5ea770485, type: 3}
       propertyPath: m_ProvidesContacts
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8016739730568959452, guid: 3dcc29235683e8146ad479b5ea770485, type: 3}
       propertyPath: m_LocalScale.x
