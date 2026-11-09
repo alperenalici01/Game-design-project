@@ -1,7 +1,13 @@
 using UnityEngine;
-
+using Unity.Cinemachine;
 public class Hazard : MonoBehaviour
 {
+    private CinemachineImpulseSource shake; // null = no shake
+    void Start()
+    {
+        // the Impulse Source on this same hazard, if it has one
+        shake = GetComponent<CinemachineImpulseSource>();
+    }
     void OnTriggerEnter(Collider other)
     {
         // Who? the courier, carrying cargo
@@ -11,5 +17,7 @@ public class Hazard : MonoBehaviour
         // Act: knock the cargo off
         carry.DropCargo();
         Debug.Log(name + " knocked the cargo off!");
+        // ...and give the camera a short bump
+        if (shake != null) shake.GenerateImpulse();
     }
 }
