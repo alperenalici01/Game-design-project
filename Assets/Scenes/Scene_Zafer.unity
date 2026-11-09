@@ -1653,6 +1653,7 @@ GameObject:
   - component: {fileID: 1121737130}
   - component: {fileID: 1121737129}
   - component: {fileID: 1121737132}
+  - component: {fileID: 1121737133}
   m_Layer: 3
   m_Name: DeliveryZone
   m_TagString: Untagged
@@ -1767,6 +1768,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44da5f91b0b17d4abadc98c5261b9b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeliveryZone
+--- !u!114 &1121737133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1121737127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93e157eb17ea9c24b941f8d3a3895c8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Goal
+  playerTag: Player
+  loopToFirstScene: 0
 --- !u!1 &1161171899
 GameObject:
   m_ObjectHideFlags: 0

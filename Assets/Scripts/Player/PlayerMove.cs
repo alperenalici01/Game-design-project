@@ -1,42 +1,37 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
 public class PlayerMove : MonoBehaviour
 {
     [SerializeField] private float maxSpeed = 5f;
-
     [SerializeField] private float acceleration = 40f;
-
     [SerializeField] private float turnSpeed = 720f;
-
-
+    [SerializeField] private Transform cameraTransform;   // leave empty: uses the Main Camera
 
     private Rigidbody rb;
-
     private InputAction moveAction;
-
-    private Vector3 direction; // where the input points
-
-    private float grip = 1f; // 1 = normal ground
+    private Vector3 direction; // where the input points, in world space
+    private float grip = 1f;   // 1 = normal ground
 
     void Start()
-
     {
-
         rb = GetComponent<Rigidbody>();
-
         moveAction = InputSystem.actions.FindAction("Move");
 
+        if (cameraTransform == null && Camera.main != null)
+        {
+            cameraTransform = Camera.main.transform;
+        }
     }
 
     void Update()
-
     {
-
         Vector2 input = moveAction.ReadValue<Vector2>();
 
-        direction = new Vector3(input.x, 0f, input.y);
+        // W = away from the camera, D = to the camera's right (flat on the ground)
+        float yaw = cameraTransform != null ? cameraTransform.eulerAngles.y : 0f;
+        Quaternion flatCamera = Quaternion.Euler(0f, yaw, 0f);
+        direction = flatCamera * new Vector3(input.x, 0f, input.y);
     }
 
     void FixedUpdate()
@@ -45,9 +40,9 @@ public class PlayerMove : MonoBehaviour
         Vector3 v = rb.linearVelocity;
         Vector3 flat = new Vector3(v.x, 0f, v.z);
 
-        // If there is input, allow normal acceleration. If there is no input (sliding on ice), use the low grip!
+        // with input: normal acceleration; without input (sliding on ice): the low grip
         float currentAcceleration = (direction.magnitude > 0.1f) ? acceleration : (acceleration * grip);
-        
+
         float step = currentAcceleration * Time.fixedDeltaTime;
         flat = Vector3.MoveTowards(flat, wanted, step);
 
@@ -62,14 +57,8 @@ public class PlayerMove : MonoBehaviour
     }
 
     // the icy ramp calls this
-
     public void SetGrip(float value)
-
     {
-
         grip = value;
-
     }
-
 }
-

@@ -15,6 +15,15 @@ public class ProceduralMazeGenerator : MonoBehaviour
     public GameObject hazardPrefab; // Top prefabını buraya sürükle
     public int hazardCount = 5;     // Kaç top üretilecek?
 
+    [Header("Düşman Ayarları")]
+    public GameObject enemyPrefab;  // Düşman prefabını buraya sürükle
+    public int enemyCount = 5;      // Kaç düşman üretilecek?
+    [Tooltip("Başlangıç noktasına bu kadar hücre yakınlıkta düşman/hazard çıkmaz")]
+    public int safeCells = 3;
+
+    [Header("Goal (Hedef) Ayarları")]
+    public GameObject goalPrefab;   // Boş bırakılırsa otomatik bir hedef küpü yaratılır
+
     private int[,] mazeGrid;
     private List<Vector3> emptyPaths = new List<Vector3>(); // Boş yolların listesi
 
@@ -22,7 +31,9 @@ public class ProceduralMazeGenerator : MonoBehaviour
     {
         GenerateMazeData();
         BuildMaze();
+        SpawnGoal();    // Önce goal, böylece onun hücresi spawn listesinden çıkar
         SpawnHazards(); // Labirent fiziksel olarak oluştuktan sonra topları yarat
+        SpawnEnemies();
     }
 
     void GenerateMazeData()
@@ -108,18 +119,65 @@ public class ProceduralMazeGenerator : MonoBehaviour
 
     void SpawnHazards()
     {
-        int spawnLimit = Mathf.Min(hazardCount, emptyPaths.Count);
+        SpawnRandom(hazardPrefab, hazardCount);
+    }
+
+    void SpawnEnemies()
+    {
+        SpawnRandom(enemyPrefab, enemyCount);
+    }
+
+    // Rastgele boş yollara prefab yerleştirir; başlangıca yakın hücreleri atlar
+    void SpawnRandom(GameObject prefab, int count)
+    {
+        if (prefab == null) return;
+
+        Vector3 start = new Vector3(1 * wallSize, 0, 0);
+        float safeDistance = safeCells * wallSize;
+
+        List<Vector3> candidates = emptyPaths.FindAll(p => Vector3.Distance(p, start) > safeDistance);
+        int spawnLimit = Mathf.Min(count, candidates.Count);
 
         for (int i = 0; i < spawnLimit; i++)
         {
-            int randomIndex = Random.Range(0, emptyPaths.Count);
-            Vector3 spawnPos = emptyPaths[randomIndex];
+            int randomIndex = Random.Range(0, candidates.Count);
+            Vector3 spawnPos = candidates[randomIndex];
 
             spawnPos.y += 0.5f;
 
-            Instantiate(hazardPrefab, spawnPos, Quaternion.identity);
+            Instantiate(prefab, spawnPos, Quaternion.identity);
 
-            emptyPaths.RemoveAt(randomIndex);
+            emptyPaths.Remove(candidates[randomIndex]);
+            candidates.RemoveAt(randomIndex);
         }
+    }
+
+    // Çıkış hücresine (sağ alt köşe) goal koyar
+    void SpawnGoal()
+    {
+        Vector3 exitPos = new Vector3((width - 2) * wallSize, 0, (depth - 1) * wallSize);
+        emptyPaths.Remove(exitPos);
+
+        GameObject goal;
+        if (goalPrefab != null)
+        {
+            goal = Instantiate(goalPrefab, exitPos + Vector3.up * 0.5f, Quaternion.identity);
+        }
+        else
+        {
+            // Prefab yoksa yeşil, görünür bir küp
+            goal = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            goal.transform.position = exitPos + Vector3.up * 0.5f;
+            goal.transform.localScale = Vector3.one * wallSize * 0.8f;
+            goal.GetComponent<Renderer>().material.color = Color.green;
+        }
+        goal.name = "Goal";
+        goal.transform.parent = this.transform;
+
+        // Çarpışınca sahne geçişi için trigger + Goal scripti
+        Collider col = goal.GetComponent<Collider>();
+        if (col == null) col = goal.AddComponent<BoxCollider>();
+        col.isTrigger = true;
+        if (goal.GetComponent<Goal>() == null) goal.AddComponent<Goal>();
     }
 }
