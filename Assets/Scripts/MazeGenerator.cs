@@ -11,28 +11,35 @@ public class ProceduralMazeGenerator : MonoBehaviour
     public int width = 25;
     public int depth = 31;
 
+    [Header("Çıkmaz Sokak (Ödül) Ayarları")]
+    [Tooltip("Çıkmaz sokakların sonuna konulacak özel eşya (Örn: Büyük Elmas/Sandık)")]
+    public GameObject specialItemPrefab;
+
     [Header("Hazard (Tehlike) Ayarları")]
-    public GameObject hazardPrefab; // Top prefabını buraya sürükle
-    public int hazardCount = 5;     // Kaç top üretilecek?
+    public GameObject hazardPrefab;
+    public int hazardCount = 5;
 
     [Header("Düşman Ayarları")]
-    public GameObject enemyPrefab;  // Düşman prefabını buraya sürükle
-    public int enemyCount = 5;      // Kaç düşman üretilecek?
+    public GameObject enemyPrefab;
+    public int enemyCount = 5;
     [Tooltip("Başlangıç noktasına bu kadar hücre yakınlıkta düşman/hazard çıkmaz")]
     public int safeCells = 3;
 
     [Header("Goal (Hedef) Ayarları")]
-    public GameObject goalPrefab;   // Boş bırakılırsa otomatik bir hedef küpü yaratılır
+    public GameObject goalPrefab;
 
     private int[,] mazeGrid;
-    private List<Vector3> emptyPaths = new List<Vector3>(); // Boş yolların listesi
+    private List<Vector3> emptyPaths = new List<Vector3>();
 
     void Start()
     {
         GenerateMazeData();
         BuildMaze();
-        SpawnGoal();    // Önce goal, böylece onun hücresi spawn listesinden çıkar
-        SpawnHazards(); // Labirent fiziksel olarak oluştuktan sonra topları yarat
+
+        SpawnGoal();
+        SpawnItemsInDeadEnds();
+
+        SpawnHazards();
         SpawnEnemies();
     }
 
@@ -40,12 +47,10 @@ public class ProceduralMazeGenerator : MonoBehaviour
     {
         mazeGrid = new int[depth, width];
 
-        // Tüm alanı duvar ile doldur
         for (int z = 0; z < depth; z++)
             for (int x = 0; x < width; x++)
                 mazeGrid[z, x] = 1;
 
-        // DFS Algoritması
         Stack<Vector2Int> stack = new Stack<Vector2Int>();
         Vector2Int startPos = new Vector2Int(1, 1);
         mazeGrid[startPos.y, startPos.x] = 0;
@@ -62,7 +67,6 @@ public class ProceduralMazeGenerator : MonoBehaviour
 
                 Vector2Int chosen = neighbors[Random.Range(0, neighbors.Count)];
 
-                // Matematiksel hata düzeltildi (chosen - current)
                 Vector2Int wall = current + (chosen - current) / 2;
                 mazeGrid[wall.y, wall.x] = 0;
                 mazeGrid[chosen.y, chosen.x] = 0;
@@ -71,7 +75,6 @@ public class ProceduralMazeGenerator : MonoBehaviour
             }
         }
 
-        // Giriş ve Çıkış Noktalarını Belirle
         mazeGrid[0, 1] = 0;
         mazeGrid[depth - 1, width - 2] = 0;
     }
@@ -99,19 +102,47 @@ public class ProceduralMazeGenerator : MonoBehaviour
         {
             for (int x = 0; x < width; x++)
             {
-                // Pozisyon hesaplama formülü düzeltildi (x * wallSize)
                 Vector3 position = new Vector3(x * wallSize, 0, z * wallSize);
 
                 if (mazeGrid[z, x] == 1)
                 {
-                    // Burası duvar, duvar yarat
                     GameObject newWall = Instantiate(wallPrefab, position, Quaternion.identity);
                     newWall.transform.parent = this.transform;
                 }
                 else if (mazeGrid[z, x] == 0)
                 {
-                    // YENİ: Burası boş yol, pozisyonunu listeye kaydet
                     emptyPaths.Add(position);
+                }
+            }
+        }
+    }
+
+    void SpawnItemsInDeadEnds()
+    {
+        if (specialItemPrefab == null) return;
+
+        for (int z = 1; z < depth - 1; z++)
+        {
+            for (int x = 1; x < width - 1; x++)
+            {
+                if (mazeGrid[z, x] == 0)
+                {
+                    int wallCount = 0;
+
+                    if (mazeGrid[z + 1, x] == 1) wallCount++; // Üst
+                    if (mazeGrid[z - 1, x] == 1) wallCount++; // Alt
+                    if (mazeGrid[z, x + 1] == 1) wallCount++; // Sağ
+                    if (mazeGrid[z, x - 1] == 1) wallCount++; // Sol
+
+                    if (wallCount == 3 && !(x == 1 && z == 1))
+                    {
+                        Vector3 spawnPos = new Vector3(x * wallSize, 0, z * wallSize);
+
+                        GameObject item = Instantiate(specialItemPrefab, spawnPos + Vector3.up * 0.5f, Quaternion.identity);
+                        item.transform.parent = this.transform;
+
+                        emptyPaths.Remove(spawnPos);
+                    }
                 }
             }
         }
@@ -127,12 +158,11 @@ public class ProceduralMazeGenerator : MonoBehaviour
         SpawnRandom(enemyPrefab, enemyCount);
     }
 
-    // Rastgele boş yollara prefab yerleştirir; başlangıca yakın hücreleri atlar
     void SpawnRandom(GameObject prefab, int count)
     {
         if (prefab == null) return;
 
-        Vector3 start = new Vector3(1 * wallSize, 0, 0);
+        Vector3 start = new Vector3(1 * wallSize, 0, 1 * wallSize);
         float safeDistance = safeCells * wallSize;
 
         List<Vector3> candidates = emptyPaths.FindAll(p => Vector3.Distance(p, start) > safeDistance);
@@ -145,14 +175,14 @@ public class ProceduralMazeGenerator : MonoBehaviour
 
             spawnPos.y += 0.5f;
 
-            Instantiate(prefab, spawnPos, Quaternion.identity);
+            GameObject spawnedObj = Instantiate(prefab, spawnPos, Quaternion.identity);
+            spawnedObj.transform.parent = this.transform; 
 
             emptyPaths.Remove(candidates[randomIndex]);
             candidates.RemoveAt(randomIndex);
         }
     }
 
-    // Çıkış hücresine (sağ alt köşe) goal koyar
     void SpawnGoal()
     {
         Vector3 exitPos = new Vector3((width - 2) * wallSize, 0, (depth - 1) * wallSize);
@@ -165,7 +195,6 @@ public class ProceduralMazeGenerator : MonoBehaviour
         }
         else
         {
-            // Prefab yoksa yeşil, görünür bir küp
             goal = GameObject.CreatePrimitive(PrimitiveType.Cube);
             goal.transform.position = exitPos + Vector3.up * 0.5f;
             goal.transform.localScale = Vector3.one * wallSize * 0.8f;
@@ -174,10 +203,10 @@ public class ProceduralMazeGenerator : MonoBehaviour
         goal.name = "Goal";
         goal.transform.parent = this.transform;
 
-        // Çarpışınca sahne geçişi için trigger + Goal scripti
         Collider col = goal.GetComponent<Collider>();
         if (col == null) col = goal.AddComponent<BoxCollider>();
         col.isTrigger = true;
+
         if (goal.GetComponent<Goal>() == null) goal.AddComponent<Goal>();
     }
 }
