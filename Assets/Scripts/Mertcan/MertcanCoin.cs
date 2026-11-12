@@ -6,6 +6,8 @@ using UnityEngine;
 public class MertcanCoin : MonoBehaviour
 {
     [SerializeField] private MertcanCoinCounter coinOwner;
+    [SerializeField, Tooltip("Boşsa normal coin. Atanırsa CargoType ağırlığı her toplamada kütleye bir kez eklenir.")]
+    private CargoType heavyType;
     private bool collected;
     private bool registeredCoin;
     public MertcanCoinCounter Owner => coinOwner;
@@ -29,6 +31,9 @@ public class MertcanCoin : MonoBehaviour
             other.attachedRigidbody == null || other.attachedRigidbody != coinOwner.PlayerBody ||
             !registeredCoin) return;
         collected = true;
+        // Birikimli Heavy, Cargo ile aynı veriyi ve fiziksel kütle mekanizmasını kullanır.
+        // Normal coinlerde veri boş kaldığı için davranışları değişmez.
+        if (heavyType != null) other.attachedRigidbody.mass += heavyType.Weight();
         coinOwner.AddCollectedCoin();
         gameObject.SetActive(false);
     }
