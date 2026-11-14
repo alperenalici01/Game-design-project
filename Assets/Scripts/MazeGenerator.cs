@@ -7,6 +7,10 @@ public class ProceduralMazeGenerator : MonoBehaviour
     public GameObject wallPrefab;
     public float wallSize = 2f;
 
+    [Header("Buz ve Sonundaki Tehlike Ayarları")]
+    public GameObject icePrefab;      // Hazırladığın IcePatch prefabını buraya sürükle
+    public int iceTrapCount = 4;      // Labirentte kaç tane buzlu tuzak koridoru olsun?
+
     [Tooltip("Genişlik ve Derinlik mutlaka TEK SAYI olmalıdır (Örn: 31, 51, 101)")]
     public int width = 25;
     public int depth = 31;
@@ -38,6 +42,7 @@ public class ProceduralMazeGenerator : MonoBehaviour
 
         SpawnGoal();
         SpawnItemsInDeadEnds();
+        SpawnIceTraps();
 
         SpawnHazards();
         SpawnEnemies();
@@ -94,6 +99,81 @@ public class ProceduralMazeGenerator : MonoBehaviour
             }
         }
         return neighbors;
+    }
+
+    void SpawnIceTraps()
+    {
+        if (icePrefab == null || hazardPrefab == null) return;
+
+        // Düz koridorları ve hemen sonlarındaki tuzak noktalarını tutacak listeler
+        List<Vector2Int> validIceCells = new List<Vector2Int>();
+        List<Vector2Int> correspondingHazardCells = new List<Vector2Int>();
+
+        for (int z = 2; z < depth - 2; z++)
+        {
+            for (int x = 2; x < width - 2; x++)
+            {
+                // Başlangıç alanından uzakta olsun
+                if (x <= 3 && z <= 3) continue;
+
+                if (mazeGrid[z, x] == 0)
+                {
+                    // Durum 1: Dikey Koridor (Sağ ve Sol duvar, Üst ve Alt boş)
+                    bool isVerticalCorridor = (mazeGrid[z, x - 1] == 1 && mazeGrid[z, x + 1] == 1) &&
+                                              (mazeGrid[z + 1, x] == 0 && mazeGrid[z - 1, x] == 0);
+
+                    // Durum 2: Yatay Koridor (Üst ve Alt duvar, Sağ ve Sol boş)
+                    bool isHorizontalCorridor = (mazeGrid[z + 1, x] == 1 && mazeGrid[z - 1, x] == 1) &&
+                                                (mazeGrid[z, x + 1] == 0 && mazeGrid[z, x - 1] == 0);
+
+                    if (isVerticalCorridor)
+                    {
+                        validIceCells.Add(new Vector2Int(x, z));
+                        // Buzun kuzey ucuna (z + 1) top koyacağız
+                        correspondingHazardCells.Add(new Vector2Int(x, z + 1));
+                    }
+                    else if (isHorizontalCorridor)
+                    {
+                        validIceCells.Add(new Vector2Int(x, z));
+                        // Buzun doğu ucuna (x + 1) top koyacağız
+                        correspondingHazardCells.Add(new Vector2Int(x + 1, z));
+                    }
+                }
+            }
+        }
+
+        int countToSpawn = Mathf.Min(iceTrapCount, validIceCells.Count);
+
+        for (int i = 0; i < countToSpawn; i++)
+        {
+            int randIdx = Random.Range(0, validIceCells.Count);
+            Vector2Int iceCoord = validIceCells[randIdx];
+            Vector2Int hazCoord = correspondingHazardCells[randIdx];
+
+            Vector3 iceWorldPos = new Vector3(iceCoord.x * wallSize, 0.02f, iceCoord.y * wallSize);
+            Vector3 hazWorldPos = new Vector3(hazCoord.x * wallSize, 0.5f, hazCoord.y * wallSize);
+
+            // Eğer o noktalar hala boş yol listesindeyse (üzerinde başka ödül/goal yoksa) yerleştir
+            Vector3 checkIce = new Vector3(iceCoord.x * wallSize, 0, iceCoord.y * wallSize);
+            Vector3 checkHaz = new Vector3(hazCoord.x * wallSize, 0, hazCoord.y * wallSize);
+
+            if (emptyPaths.Contains(checkIce) && emptyPaths.Contains(checkHaz))
+            {
+                // Buzu yerleştir
+                GameObject ice = Instantiate(icePrefab, iceWorldPos, Quaternion.identity);
+                ice.transform.parent = this.transform;
+
+                // Hemen buzun bittiği hücreye tehlike topunu yerleştir
+                GameObject hazard = Instantiate(hazardPrefab, hazWorldPos, Quaternion.identity);
+                hazard.transform.parent = this.transform;
+
+                emptyPaths.Remove(checkIce);
+                emptyPaths.Remove(checkHaz);
+            }
+
+            validIceCells.RemoveAt(randIdx);
+            correspondingHazardCells.RemoveAt(randIdx);
+        }
     }
 
     void BuildMaze()
