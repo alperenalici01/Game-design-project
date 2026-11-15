@@ -7,13 +7,12 @@ public class RotatingPlatform : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Debug.Log("Start: " + name);
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(0f, rotationSpeed, 0f);
+        transform.Rotate(0f, rotationSpeed * 60f * Time.deltaTime, 0f);
     }
 
     

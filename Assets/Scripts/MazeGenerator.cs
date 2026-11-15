@@ -162,6 +162,8 @@ public class ProceduralMazeGenerator : MonoBehaviour
                 // Buzu yerleştir
                 GameObject ice = Instantiate(icePrefab, iceWorldPos, Quaternion.identity);
                 ice.transform.parent = this.transform;
+                // Buz tek bir hücreye sığsın (prefab 2x2, wallSize 1 ise komşu hücrelere taşıyordu)
+                ice.transform.localScale = new Vector3(wallSize, ice.transform.localScale.y, wallSize);
 
                 // Hemen buzun bittiği hücreye tehlike topunu yerleştir
                 GameObject hazard = Instantiate(hazardPrefab, hazWorldPos, Quaternion.identity);

@@ -13,6 +13,7 @@ public class Cargo : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         box = GetComponent<BoxCollider>();
         range = GetComponent<SphereCollider>();
+        if (range == null) range = box; // no separate pickup trigger: reuse the body collider
         // an empty Type slot? say it in red
         if (type == null) Debug.LogError(name + ": no Cargo Type");
     }
@@ -34,7 +35,7 @@ public class Cargo : MonoBehaviour
     {
         rb.isKinematic = true; // physics stops
         box.enabled = false; // no bumping
-        range.enabled = false; // no re-pickup
+        if (range != null) range.enabled = false; // no re-pickup
                                // become a child of the carry point
         transform.SetParent(carryPoint);
         transform.localPosition = Vector3.zero;
@@ -44,7 +45,7 @@ public class Cargo : MonoBehaviour
     {
         transform.SetParent(null); // free again
         box.enabled = true;
-        range.enabled = true;
+        if (range != null) range.enabled = true;
         rb.isKinematic = false; // physics again
                                 // push it back and up, away from the courier
         Vector3 push = -transform.forward + Vector3.up;

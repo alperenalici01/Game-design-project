@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerJumpMete : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class PlayerJumpMete : MonoBehaviour
         isGrounded = Physics.Raycast(transform.position, Vector3.down, 1.2f);
 
         // Boşluk tuşuna basıldığında ve yerdeysek
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame && isGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }

@@ -9,6 +9,7 @@ public class KillZone : MonoBehaviour
         if (other.GetComponent<PlayerMove>() == null) return;
 
         // Act: the level starts again
-        LevelManager.Instance.Restart();
+        if (LevelManager.Instance != null) LevelManager.Instance.Restart();
+        else if (LevelManager_Zafer.Instance != null) LevelManager_Zafer.Instance.Restart();
     }
 }

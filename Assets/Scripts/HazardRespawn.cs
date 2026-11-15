@@ -29,6 +29,12 @@ public class HazardRespawn : MonoBehaviour
                 rb.angularVelocity = Vector3.zero;
             }
 
+            // Düşen kargoyu bırak, buz tutuşunu sıfırla
+            PlayerCarry carry = other.GetComponentInParent<PlayerCarry>();
+            if (carry != null && carry.IsCarrying()) carry.DropCargo();
+            PlayerMove move = other.GetComponentInParent<PlayerMove>();
+            if (move != null) move.SetGrip(1f);
+
             // Zeminin biraz üzerinden bırak ki çarpışma kusursuz algılansın
             other.transform.position = startPosition + Vector3.up * 0.5f;
         }
