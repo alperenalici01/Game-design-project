@@ -340,8 +340,8 @@ GameObject:
   - component: {fileID: 20053860}
   - component: {fileID: 20053859}
   - component: {fileID: 20053858}
-  - component: {fileID: 20053857}
   - component: {fileID: 20053861}
+  - component: {fileID: 20053862}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -349,21 +349,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &20053857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 20053856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 498f305b1b1059d4cbdd64e8c496f474, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  target: {fileID: 1339148669}
-  offset: {x: 0, y: 7, z: -11}
-  smooth: 5
 --- !u!81 &20053858
 AudioListener:
   m_ObjectHideFlags: 0
@@ -482,6 +467,30 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &20053862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20053856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b51ae1f8e7a156a4192a198323d40205, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TpsCamera
+  target: {fileID: 1339148669}
+  distance: 6
+  lookHeight: 1.5
+  sensitivity: 0.15
+  minPitch: -20
+  maxPitch: 70
+  smooth: 15
+  collisionRadius: 0.3
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  lockCursor: 1
 --- !u!1001 &31056996
 PrefabInstance:
   m_ObjectHideFlags: 0
