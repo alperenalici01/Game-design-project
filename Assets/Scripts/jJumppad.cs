@@ -5,21 +5,25 @@ using UnityEngine.Serialization;
 public class jJumppad : MonoBehaviour
 {
     [FormerlySerializedAs("jumpForce")]
-    [SerializeField] private float launchSpeed = 12f; // meters per second, not force
+    [SerializeField] private float launchSpeed = 12f; 
     [SerializeField] private float cooldown = 0.5f;
     [SerializeField] private bool usePadUp = true;
     [SerializeField] private bool preserveHorizontalVelocity = true;
 
+    [SerializeField] private float normalMass = 1f;          
+    [SerializeField] private float reductionPerMass = 0.2f;  
+    [SerializeField] private float minMultiplier = 0.6f;      
+
     private readonly HashSet<Collider> contacts = new HashSet<Collider>();
     private float nextLaunchAt;
 
-    // Works when the pad is a normal solid collider.
+    
     private void OnCollisionEnter(Collision collision)
     {
         TryLaunch(collision.collider);
     }
 
-    // Works when the pad collider has "Is Trigger" enabled.
+    
     private void OnTriggerEnter(Collider other)
     {
         contacts.Add(other);
@@ -28,7 +32,7 @@ public class jJumppad : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        // Handles the case where the player starts already inside the trigger.
+        
         if (contacts.Add(other))
         {
             TryLaunch(other);
@@ -45,7 +49,7 @@ public class jJumppad : MonoBehaviour
         if (other == null) return;
         if (Time.time < nextLaunchAt) return;
 
-        // Finds the Rigidbody even when the collider is a child object.
+        
         Rigidbody rb = other.attachedRigidbody;
         if (rb == null || rb.isKinematic) return;
 
@@ -58,7 +62,21 @@ public class jJumppad : MonoBehaviour
             ? Vector3.ProjectOnPlane(currentVelocity, up)
             : Vector3.zero;
 
-        SetVelocity(rb, horizontalVelocity + up * launchSpeed);
+        
+        float effectiveMass = rb.mass;
+        JP_Special_Carry special = rb.GetComponent<JP_Special_Carry>();
+        if (special != null)
+        {
+            float stacked = special.StackedMass(normalMass);
+            if (stacked >= 0f) effectiveMass = stacked; 
+        }
+
+        float extraMass = Mathf.Max(0f, effectiveMass - normalMass);
+        float multiplier = Mathf.Clamp(1f - extraMass * reductionPerMass, minMultiplier, 1f);
+
+        Debug.Log("player mass: " + effectiveMass + " | çarpan: " + multiplier);
+
+        rb.linearVelocity = horizontalVelocity + up * launchSpeed * multiplier;
 
         nextLaunchAt = Time.time + cooldown;
     }
@@ -72,7 +90,7 @@ public class jJumppad : MonoBehaviour
             return true;
         }
 
-        // Also works if the Player object is still tagged "Untagged".
+        
         return other.GetComponentInParent<PlayerMove>() != null
             || other.GetComponentInParent<PlayerJump>() != null;
     }

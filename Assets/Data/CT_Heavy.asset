@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: CT_Heavy
   m_EditorClassIdentifier: Assembly-CSharp::CargoType
   points: 2
-  weight: 1
+  weight: 3
