@@ -258,7 +258,7 @@ MonoBehaviour:
   iceTrapCount: 7
   width: 31
   depth: 31
-  specialItemPrefab: {fileID: 1666171092}
+  specialItemPrefab: {fileID: 0}
   hazardPrefab: {fileID: 6288000393008907250, guid: c89398cd6f114c4439be13a413677c4f, type: 3}
   hazardCount: 5
   enemyPrefab: {fileID: 6288000393008907250, guid: c89398cd6f114c4439be13a413677c4f, type: 3}
@@ -1317,7 +1317,6 @@ GameObject:
   - component: {fileID: 1886067065}
   - component: {fileID: 1886067064}
   - component: {fileID: 1886067063}
-  - component: {fileID: 1886067062}
   - component: {fileID: 1886067071}
   - component: {fileID: 1886067070}
   - component: {fileID: 1886067068}
@@ -1330,29 +1329,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!136 &1886067062
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1886067061}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1886067063
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1387,7 +1363,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1886067061}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: dca7f0c905afb0642be2a4a3ee0cadab, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
