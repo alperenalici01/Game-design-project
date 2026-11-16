@@ -258,7 +258,7 @@ MonoBehaviour:
   iceTrapCount: 7
   width: 31
   depth: 31
-  specialItemPrefab: {fileID: 0}
+  specialItemPrefab: {fileID: 1666171092}
   hazardPrefab: {fileID: 6288000393008907250, guid: c89398cd6f114c4439be13a413677c4f, type: 3}
   hazardCount: 5
   enemyPrefab: {fileID: 6288000393008907250, guid: c89398cd6f114c4439be13a413677c4f, type: 3}
@@ -1245,7 +1245,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -4769475930525410068, guid: c5ede4ab3e6b766478d0fa4815cbdc7a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
