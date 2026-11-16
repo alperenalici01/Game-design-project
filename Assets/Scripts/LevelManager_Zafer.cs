@@ -1,13 +1,13 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement; // Sahne geçişleri için bu şart!
 
 public class LevelManager_Zafer : MonoBehaviour
 {
-    // the one LevelManager in the scene: any script can reach it
     public static LevelManager_Zafer Instance;
 
-    [SerializeField] private Rigidbody player;       // drag the Player here
-    [SerializeField] private Transform coinsParent;  // drag Level > Coins here
+    [SerializeField] private Rigidbody player;
+    [SerializeField] private Transform coinsParent;
     [SerializeField] private int fontSize = 36;
 
     private Vector3 startPosition;
@@ -19,20 +19,22 @@ public class LevelManager_Zafer : MonoBehaviour
     void Awake()
     {
         Instance = this;
-        Time.timeScale = 1f;   // time runs normally
+        Time.timeScale = 1f;
     }
 
     void Start()
     {
-        // remember where the player starts and which cargo items exist
         startPosition = player.position;
         startRotation = player.rotation;
         allCargo = coinsParent.GetComponentsInChildren<Cargo>(true);
+
+        // Şunu ekleyin: Konsola toplam kaç coin bulduğunu yazdırsın
+        Debug.Log("Algılanan Toplam Coin Sayısı: " + allCargo.Length);
     }
 
     void Update()
     {
-        // after the victory: R plays the level again
+        // İstrsen R tuşu ile hala bölümü sıfırlayabilirsin
         if (won && Keyboard.current != null && Keyboard.current.rKey.wasPressedThisFrame)
         {
             won = false;
@@ -41,37 +43,63 @@ public class LevelManager_Zafer : MonoBehaviour
         }
     }
 
-    // a coin/cargo calls this
+    // Bir coin hedefe getirildiğinde burası çağrılacak
     public void AddCoin()
     {
+        if (won) return;
+
         coins++;
+        Debug.Log("Toplanan Coin: " + coins + " / " + allCargo.Length);
+
+        // İŞTE BURASI: Eğer toplanan coin sayısı toplam coin sayısına ulaştıysa veya geçtiyse kazan!
+        if (coins >= allCargo.Length)
+        {
+            Win();
+        }
     }
 
-    // spikes, the turtle and the fall zone call this
+    // Spikes, düşme bölgesi vb. çağırır
     public void Restart()
     {
-        if (won) return;   // no dying after the victory
+        if (won) return;
         ResetLevel();
     }
 
-    // the exit door calls this
+    // Tüm coinler toplandığında burası tetiklenir
     public void Win()
     {
         if (won) return;
         won = true;
-        Time.timeScale = 0f;   // freeze the game
+
+        // Ekranda "Victory" yazısını 1.5 saniye gösterip sonraki level'a geçelim:
+        Invoke("LoadNextLevel", 1.5f);
+    }
+
+    void LoadNextLevel()
+    {
+        Time.timeScale = 1f; // Zamanı normale al
+        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+
+        // Eğer sırada başka bir sahne varsa onu aç, yoksa ilk sahneye (veya ana menüye) dön
+        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(nextSceneIndex);
+        }
+        else
+        {
+            Debug.Log("Oyun bitti! Son leveldaydınız.");
+            SceneManager.LoadScene(0); // Örn: Ana menü veya 0. sahne
+        }
     }
 
     void ResetLevel()
     {
-        // back to the start, standing still
         player.linearVelocity = Vector3.zero;
         player.angularVelocity = Vector3.zero;
         player.position = startPosition;
         player.rotation = startRotation;
         player.transform.SetPositionAndRotation(startPosition, startRotation);
 
-        // every cargo comes back, the counter starts again
         coins = 0;
         foreach (Cargo cargo in allCargo)
         {
@@ -79,7 +107,6 @@ public class LevelManager_Zafer : MonoBehaviour
         }
     }
 
-    // draws the text on the screen
     void OnGUI()
     {
         GUIStyle style = new GUIStyle(GUI.skin.label);
@@ -93,6 +120,6 @@ public class LevelManager_Zafer : MonoBehaviour
         style.alignment = TextAnchor.MiddleCenter;
         style.normal.textColor = Color.green;
         GUI.Label(new Rect(0, 0, Screen.width, Screen.height),
-                  "VICTORY!\n" + coins + " / " + allCargo.Length + " coins\n\nPress R to play again", style);
+                  "VICTORY!\nAll coins collected!\nLoading next level...", style);
     }
 }
