@@ -1957,7 +1957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21d7da83ffb0aea409aaaa219f064dbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Cargo
-  type: {fileID: 11400000, guid: 75465b2889c922c4d9a056415a5ad262, type: 2}
+  type: {fileID: 11400000, guid: 0a9ccac1404c5344f8f3aa888d446719, type: 2}
 --- !u!54 &667646720
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2510,7 +2510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21d7da83ffb0aea409aaaa219f064dbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Cargo
-  type: {fileID: 11400000, guid: 75465b2889c922c4d9a056415a5ad262, type: 2}
+  type: {fileID: 11400000, guid: 0a9ccac1404c5344f8f3aa888d446719, type: 2}
 --- !u!54 &823731601
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5936,7 +5936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21d7da83ffb0aea409aaaa219f064dbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Cargo
-  type: {fileID: 11400000, guid: 75465b2889c922c4d9a056415a5ad262, type: 2}
+  type: {fileID: 11400000, guid: 0a9ccac1404c5344f8f3aa888d446719, type: 2}
 --- !u!54 &6708077191572824417
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6121,7 +6121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21d7da83ffb0aea409aaaa219f064dbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Cargo
-  type: {fileID: 11400000, guid: 75465b2889c922c4d9a056415a5ad262, type: 2}
+  type: {fileID: 11400000, guid: 0a9ccac1404c5344f8f3aa888d446719, type: 2}
 --- !u!54 &6708077191572824424
 Rigidbody:
   m_ObjectHideFlags: 0
