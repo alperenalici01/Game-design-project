@@ -1,32 +1,42 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
+using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
     // the one LevelManager in the scene: any script can reach it
     public static LevelManager Instance;
 
-    [SerializeField] private Rigidbody player;       // drag the Player here
-    [SerializeField] private Transform coinsParent;  // drag Level > Coins here
+    [Header("Level")]
+    [SerializeField] private Rigidbody player;        // drag the Player here
+    [SerializeField] private Transform coinsParent;   // drag Level > Coins here
     [SerializeField] private Transform enemiesParent; // drag Level > Enemies here
-    [SerializeField] private int fontSize = 36;
+
+    [Header("Round")]
+    [SerializeField] private float roundLength = 120f; // seconds to reach the flag
+    [SerializeField] private int pointsPerCoin = 10;   // a coin is worth 10 points
+
+    [Header("HUD")]
+    [SerializeField] private TMP_Text coinText;       // top-left
+    [SerializeField] private TMP_Text timeText;       // top-centre
+    [SerializeField] private LevelEndScreen endScreen; // the panel on the Canvas
 
     private Vector3 startPosition;
     private Quaternion startRotation;
     private CoinPickup[] allCoins;
     private StompableEnemy[] allEnemies = new StompableEnemy[0];
     private int coins;
-    private bool won;
+    private float timeLeft;
+    private bool over;   // true once the round has ended
 
     void Awake()
     {
         Instance = this;
-        Time.timeScale = 1f;   // time runs normally
+        Time.timeScale = 1f;   // a fresh round always starts with time running
     }
 
     void Start()
     {
-        // remember where the player starts and which coins exist
+        // remember where the player starts, which coins and enemies exist
         startPosition = player.position;
         startRotation = player.rotation;
         allCoins = coinsParent.GetComponentsInChildren<CoinPickup>(true);
@@ -34,38 +44,51 @@ public class LevelManager : MonoBehaviour
         {
             allEnemies = enemiesParent.GetComponentsInChildren<StompableEnemy>(true);
         }
+        timeLeft = roundLength;   // a full clock
     }
 
     void Update()
     {
-        // after the victory: R plays the level again
-        if (won && Keyboard.current != null && Keyboard.current.rKey.wasPressedThisFrame)
-        {
-            won = false;
-            Time.timeScale = 1f;
-            ResetLevel();
-        }
+        if (over) return;   // ended: nothing changes any more
+
+        // count down, but never below zero
+        timeLeft -= Time.deltaTime;
+        if (timeLeft < 0f) timeLeft = 0f;
+        ShowHud();
+        if (timeLeft <= 0f) EndRound("Time's up!", false);
     }
 
     // a coin calls this
     public void AddCoin()
     {
+        if (over) return;
         coins++;
     }
 
-    // spikes, the turtle and the fall zone call this
+    // spikes, bees, the fall zone and enemies call this
     public void Restart()
     {
-        if (won) return;   // no dying after the victory
+        if (over) return;   // no dying after the end
         ResetLevel();
     }
 
-    // the exit door calls this
+    // the flag calls this
     public void Win()
     {
-        if (won) return;
-        won = true;
-        Time.timeScale = 0f;   // freeze the game
+        EndRound("You made it!", true);
+    }
+
+    void EndRound(string message, bool reachedFlag)
+    {
+        if (over) return;   // don't end it twice
+        over = true;
+        Time.timeScale = 0f;   // stop the world
+
+        // coins give points; reaching the flag adds the seconds still left
+        int score = coins * pointsPerCoin;
+        if (reachedFlag) score += Mathf.CeilToInt(timeLeft);
+
+        endScreen.Show(message, coins, allCoins.Length, score);
     }
 
     void ResetLevel()
@@ -77,34 +100,21 @@ public class LevelManager : MonoBehaviour
         player.rotation = startRotation;
         player.transform.SetPositionAndRotation(startPosition, startRotation);
 
-        // every coin comes back, the counter starts again
+        // every coin and every stomped enemy comes back
         coins = 0;
-        foreach (CoinPickup coin in allCoins)
-        {
-            coin.gameObject.SetActive(true);
-        }
+        foreach (CoinPickup coin in allCoins) coin.gameObject.SetActive(true);
+        foreach (StompableEnemy enemy in allEnemies) enemy.gameObject.SetActive(true);
 
-        // stomped enemies come back too
-        foreach (StompableEnemy enemy in allEnemies)
-        {
-            enemy.gameObject.SetActive(true);
-        }
+        // a fresh clock too
+        timeLeft = roundLength;
     }
 
-    // draws the text on the screen
-    void OnGUI()
+    // write both numbers on the screen
+    void ShowHud()
     {
-        GUIStyle style = new GUIStyle(GUI.skin.label);
-        style.fontSize = fontSize;
-        style.fontStyle = FontStyle.Bold;
-        style.normal.textColor = Color.yellow;
-        GUI.Label(new Rect(20, 20, 600, 80), "Coins: " + coins + " / " + allCoins.Length, style);
-
-        if (!won) return;
-        style.fontSize = Mathf.Max(18, fontSize - 8);
-        style.alignment = TextAnchor.MiddleCenter;
-        style.normal.textColor = Color.green;
-        GUI.Label(new Rect(0, 0, Screen.width, Screen.height),
-                  "VICTORY!\n" + coins + " / " + allCoins.Length + " coins\n\nPress R to play again", style);
+        coinText.text = "Coins " + coins + " / " + allCoins.Length;
+        int seconds = Mathf.CeilToInt(timeLeft);
+        int minutes = seconds / 60;
+        timeText.text = minutes + ":" + (seconds % 60).ToString("00");
     }
 }
