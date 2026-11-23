@@ -1,25 +1,17 @@
 using UnityEngine;
-
 public class DeliveryZone : MonoBehaviour
 {
-    private int score;
-
+    // the Round keeps the score now
+    [SerializeField] private Round round;
     void OnTriggerEnter(Collider other)
     {
+        // Who? the courier, carrying cargo
         PlayerCarry carry = other.GetComponent<PlayerCarry>();
         if (carry == null) return;
         if (!carry.IsCarrying()) return;
-
+        // Act: take the cargo, pay its points, remove it
         Cargo cargo = carry.HandOver();
-        score += cargo.Points();
-        Debug.Log("Delivered! +" + cargo.Points() + " Score: " + score);
-
-        // BURASI ÇOK ÖNEMLİ: LevelManager'a 1 coin teslim edildiğini bildiriyoruz
-        if (LevelManager_Zafer.Instance != null)
-        {
-            LevelManager_Zafer.Instance.AddCoin();
-        }
-
+        round.AddPoints(cargo.Points());
         Destroy(cargo.gameObject);
     }
 }
