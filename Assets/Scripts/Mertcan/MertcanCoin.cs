@@ -27,7 +27,7 @@ public class MertcanCoin : MonoBehaviour
 
     private void Collect(Collider other)
     {
-        if (collected || coinOwner == null || !coinOwner.enabled || coinOwner.IsCompleted ||
+        if (collected || coinOwner == null || !coinOwner.enabled || coinOwner.IsFinished ||
             other.attachedRigidbody == null || other.attachedRigidbody != coinOwner.PlayerBody ||
             !registeredCoin) return;
         collected = true;

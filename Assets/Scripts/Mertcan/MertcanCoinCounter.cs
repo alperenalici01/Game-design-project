@@ -13,6 +13,7 @@ public class MertcanCoinCounter : MonoBehaviour
     public int CollectedCoins { get; private set; }
     public Rigidbody PlayerBody => playerBody;
     public bool IsCompleted => completion != null && completion.IsCompleted;
+    public bool IsFinished => completion != null && completion.IsFinished;
 
     private void Awake()
     {

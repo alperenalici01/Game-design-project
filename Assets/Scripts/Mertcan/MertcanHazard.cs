@@ -1,6 +1,6 @@
 using UnityEngine;
 
-// Tehlikenin hareketini değil, oyuncuya temas ettiğinde respawn istemesini yönetir.
+// Tehlikenin hareketini değil, oyuncuya temas ettiğinde Game Over istemesini yönetir.
 [DefaultExecutionOrder(-100)]
 [DisallowMultipleComponent]
 public class MertcanHazard : MonoBehaviour
@@ -27,6 +27,6 @@ public class MertcanHazard : MonoBehaviour
         Rigidbody otherBody = other.attachedRigidbody;
         if (otherBody == null) return;
         MertcanRespawn player = otherBody.GetComponent<MertcanRespawn>();
-        if (player != null) player.RequestRespawn();
+        if (player != null) player.RequestGameOver();
     }
 }

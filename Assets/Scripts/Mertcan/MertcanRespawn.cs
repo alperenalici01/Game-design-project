@@ -23,7 +23,8 @@ public class MertcanRespawn : MonoBehaviour
     private float ignoreContactsUntil = float.NegativeInfinity;
 
     public bool IsCompleted => completion != null && completion.IsCompleted;
-    public bool CanCarry => !IsCompleted && !pendingRespawn;
+    public bool IsFinished => completion != null && completion.IsFinished;
+    public bool CanCarry => !IsFinished && !pendingRespawn;
     public bool CanReadPlatformContact => CanCarry && Time.fixedTime > ignoreContactsUntil;
 
     protected virtual void Awake()
@@ -42,7 +43,7 @@ public class MertcanRespawn : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (IsCompleted || body == null) return;
+        if (IsFinished || body == null) return;
         // Ortak hareket bileşenleri güncel girdiyi okumadan önce kontrolü geri aç.
         if (resumeControls)
         {
@@ -55,7 +56,7 @@ public class MertcanRespawn : MonoBehaviour
 
     public void RequestRespawn()
     {
-        if (!enabled || IsCompleted || body == null || pendingRespawn || resumeControls ||
+        if (!enabled || IsFinished || body == null || pendingRespawn || resumeControls ||
             Time.fixedTime <= ignoreContactsUntil) return;
         pendingRespawn = true;
         movementWasEnabled = movement.enabled;
@@ -64,9 +65,16 @@ public class MertcanRespawn : MonoBehaviour
         jump.enabled = false;
     }
 
+    public void RequestGameOver()
+    {
+        if (!enabled || IsFinished || body == null || resumeControls ||
+            Time.fixedTime <= ignoreContactsUntil) return;
+        if (completion != null) completion.GameOver();
+    }
+
     protected virtual void LateUpdate()
     {
-        if (!IsCompleted && pendingRespawn) Respawn();
+        if (!IsFinished && pendingRespawn) Respawn();
     }
 
     private void Respawn()
